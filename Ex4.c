@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include<string.h>
+#include<stdlib.h>
 
-#include <stdbool.h>
+
 
 #define WORD (int)30
 #define LINE (int)255
@@ -19,7 +21,7 @@ boolean endOfWord ;
 } node;
 
 
-node *getNode() 
+node *getNode(void) 
 { 
     node *pNode = NULL; 
     
@@ -132,7 +134,6 @@ int wordAmount(node *root, const char *word)
         // call the display function recursively 
         // for child node 
         if (root->next_child[i] != NULL)  
-
         { 
             str[level] = i + 'a'; 
             display(root->next_child[i], str, level + 1); 
@@ -170,57 +171,21 @@ int wordAmount(node *root, const char *word)
     } 
 } 
 
+void freeMemory(node* curs)
+{
+    free_all(curs);
+}
+
+void free_all(node* curs)
+{
+    int i;
+    if(!curs) return;   // safe guard including root node. 
+
+    // recursive case (go to end of trie)
+    for (i = 0; i < 27; i++)
+       free_all(curs->next_child[i]);
 
 
-
-int main() 
-{ 
-   //char *str_local = { '\0' };
-
-  char temp[WORD] = { '\0' };
-  char position = 1;
-
-  char line[LINE];
-  char *ln = line;
-
-  while (fgets (ln, LINE, stdin) != NULL)
-    {
-      //printf (" %s", line);
-
-      while (*ln != '\0' && position > 0 && *ln != '\n')
-	{
-	  position = getword (ln);
-
-	  strncpy (temp, ln, position);
-	  
-
-
-	  ln = (ln + position + 1);
-
-	  for (int i = 0; *(temp+i) != '\0'; i++)
-	    {
-
-	      *(temp + i) = '\0';
-	    }
-
-
-	}
-	ln = line;
-    }
-    node *root = getNode(); 
-  
-    // Construct trie 
-    int i; 
-    for (i = 0; i < ARRAY_SIZE(keys); i++) 
-        insert(root, keys[i]); 
-  
-
-  int level = 0; 
-    char str[20]; 
-  
-    // Displaying content of Trie 
-    display(root, str, level); 
-    printf("\n");
-    displayR(root, str, level); 
-    return 0; 
-} 
+    // base case
+    free(curs);
+}
