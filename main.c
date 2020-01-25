@@ -26,6 +26,8 @@ int split(char *str, char *arr[10]){
         beginIndex = endIndex;
         if (wordCnt == maxWords)
             break;
+    
+        free(tmp);
     }
     return wordCnt;
 }
@@ -33,8 +35,7 @@ int split(char *str, char *arr[10]){
 int main() 
 { 
 
- char** keys = malloc(2 * sizeof(*keys));
-
+  char** keys = malloc(2 * sizeof(*keys));
   char line[LINE];
   char *ln = line;
   char *token;
@@ -64,8 +65,15 @@ int main()
     display(root, str, level); 
     printf("\n");
     displayR(root, str, level); 
+    size_t n = sizeof(keys)/sizeof(keys[0]);
+    for (size_t j = 0; j < n; j++)
+    {
+        /* code */
+         free(keys[j]);
+    }
     
     free(keys);
-    //freeMemory(root);
+    freeMemory(root);
+
     return 0; 
 } 
