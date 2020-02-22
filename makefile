@@ -4,9 +4,9 @@ OBJECTS_MAIN=main.o
 OBJECTS_LIB=Ex4.o
 FLAGS= -Wall -g
 
-all: trie_lib  maind
+all: trie_lib  frequency‬‬
 
-maind: $(OBJECTS_MAIN)  
+frequency‬‬: $(OBJECTS_MAIN)  
 	$(CC) $(FLAGS) -o ‫‪frequency‬‬ $(OBJECTS_MAIN) ./trie_lib.so
 
 trie_lib: trie_lib.so
@@ -22,7 +22,7 @@ trie_lib.so: $(OBJECTS_LIB) Ex4.h
 main.o: main.c Ex4.h
 	$(CC) $(FLAG) -c main.c
 
-.PHONY: clean all trie_lib maind
+.PHONY: clean all trie_lib frequency‬‬
 
 clean:
 	rm -f *.o *.a *.so progmains progmaind
