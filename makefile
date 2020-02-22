@@ -7,7 +7,7 @@ FLAGS= -Wall -g
 all: trie_lib  maind
 
 maind: $(OBJECTS_MAIN)  
-	$(CC) $(FLAGS) -o maind $(OBJECTS_MAIN) ./trie_lib.so
+	$(CC) $(FLAGS) -o ‫‪frequency‬‬ $(OBJECTS_MAIN) ./trie_lib.so
 
 trie_lib: trie_lib.so
 
